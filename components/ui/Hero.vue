@@ -250,7 +250,6 @@ export default {
                 :spaceBetween="15"
                 :loop="true"
                 :centeredSlides="true"
-                :pagination="pagination"
                 :modules="modules"
                 class="mySwiper"
                 :autoplay="{
