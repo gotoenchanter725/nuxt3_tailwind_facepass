@@ -1,6 +1,6 @@
 <script>
 import HeroProfile from "~/components/HeroProfile.vue";
-import HeroProfileMobile from "~/components/HeroProfileMobile.vue";
+// import HeroProfileMobile from "~/components/HeroProfileMobile.vue";
 import { heroAvatars } from "~/composables/states";
 import { Swiper, SwiperSlide } from "swiper/vue";
 
@@ -9,6 +9,11 @@ import "swiper/css/pagination";
 import { Pagination, Autoplay, Navigation } from "swiper";
 
 export default {
+    data() {
+        return {
+            swiper: null,
+        };
+    },
     setup() {
         const avatars = heroAvatars();
         return {
@@ -33,6 +38,23 @@ export default {
         Swiper,
         SwiperSlide,
         HeroProfile,
+    },
+    mounted() {
+        // Get the pagination container element
+        // const paginationContainer =
+        //     this.$el.querySelector(".swiper-pagination");
+        // // Get the pagination dots elements
+        // const paginationDots = paginationContainer.querySelectorAll(
+        //     ".swiper-pagination-bullet"
+        // );
+        // // Get the HTML tag where you want to append the pagination dots
+        // const targetElement = this.$el.querySelector(
+        //     "#pagination-dots-container"
+        // );
+        // // Loop through the pagination dots and append them to the target element
+        // paginationDots.forEach((dot) => {
+        //     targetElement.appendChild(dot);
+        // });
     },
 };
 </script>
@@ -96,14 +118,14 @@ export default {
                     Facepass é a ferramenta completa de gestão de eventos com o
                     uso de reconhecimento facial. Tudo em um piscar de olhos.
                 </p>
-                <div class="flex justify-center lg:justify-end">
+                <div class="flex justify-center lg:justify-start">
                     <button
-                        class="h-[56px] w-[229px] bg-ui-orange text-white font-[700] rounded-full mx-auto"
+                        class="h-[56px] w-[229px] bg-ui-orange text-white font-[700] rounded-full mx-auto lg:mx-0"
                     >
                         Entrar em contato
                     </button>
                 </div>
-                <div
+                <!-- <div
                     id="custom-pagination"
                     class="items-center gap-4 mt-[80px] hidden lg:flex"
                 >
@@ -122,9 +144,11 @@ export default {
                     >
                         03
                     </button>
-                </div>
+                </div> -->
+                <div id="pagination-dots-container"></div>
             </div>
             <div
+                id="swiper-container"
                 class="ui-hero-slider w-[1000px] hidden lg:block absolute right-[-320px] top-1/2 transform -translate-y-1/2 z-10"
             >
                 <swiper
@@ -379,5 +403,12 @@ export default {
     color: white;
     text-align: center;
     line-height: 30px;
+}
+
+#swiper-pagination {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 </style>
