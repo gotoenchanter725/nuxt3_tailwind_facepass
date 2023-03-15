@@ -2,20 +2,18 @@
 import HeroProfile from "~/components/HeroProfile.vue";
 // import HeroProfileMobile from "~/components/HeroProfileMobile.vue";
 import { heroAvatars } from "~/composables/states";
-import { Swiper, SwiperSlide } from "swiper/vue";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/vue";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay, Navigation } from "swiper";
 
+console.log(useSwiper);
+
 export default {
-    data() {
-        return {
-            swiper: null,
-        };
-    },
     setup() {
         const avatars = heroAvatars();
+        const swiper = useSwiper();
         return {
             avatars,
             modules: [Autoplay, Pagination, Navigation],
@@ -32,6 +30,7 @@ export default {
                     );
                 },
             },
+            swiper,
         };
     },
     components: {
@@ -120,6 +119,7 @@ export default {
                 </p>
                 <div class="flex justify-center lg:justify-start">
                     <button
+                        @click="swiper.slideNext()"
                         class="h-[56px] w-[229px] bg-ui-orange text-white font-[700] rounded-full mx-auto lg:mx-0"
                     >
                         Entrar em contato
@@ -146,6 +146,10 @@ export default {
                     </button>
                 </div> -->
                 <div id="pagination-dots-container"></div>
+                <!-- <button @click="this.swiper.slidePrev()">Previous</button> -->
+                <!-- <button @click="swiper.slideNext()">
+                    Slide to the next slide
+                </button> -->
             </div>
             <div
                 id="swiper-container"
@@ -158,6 +162,7 @@ export default {
                     :pagination="pagination"
                     :modules="modules"
                     class="mySwiper"
+                    :navigation="true"
                     :autoplay="{
                         delay: 2500,
                         disableOnInteraction: true,
